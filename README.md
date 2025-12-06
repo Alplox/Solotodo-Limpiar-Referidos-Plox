@@ -23,7 +23,7 @@ Necesitas un gestor de scripts de usuario como:
 ## 📦 Instalación
 
 1. Instala un gestor de userscripts (ver arriba)
-2. 📥 [Haz clic aquí para instalar el script](https://raw.githubusercontent.com/Alplox/Solotodo-Limpiar-Referidos-Plox/refs/heads/main/solotodo-limpiar-referidos-plox.user.js)
+2. 📥 [Haz clic aquí para instalar el script](https://raw.githubusercontent.com/Alplox/Solotodo-Limpiar-Referidos-Plox/refs/heads/main/solotodo-limpiar-referidos-plox.user.js) o [Ir a Greasyfork](https://greasyfork.org/es/scripts/558071-solotodo-limpiar-referidos-plox)
 
 ## Ejemplo
 
