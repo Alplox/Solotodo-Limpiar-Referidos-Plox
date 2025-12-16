@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Solotodo Limpiar Referidos Plox
 // @namespace    limpiotodo
-// @version      0.1
+// @version      0.2
 // @description  Limpia enlaces redirigidos y elimina parámetros de seguimiento en solotodo.cl
 // @author       Alplox
 // @match        https://*.solotodo.cl/*
@@ -65,7 +65,7 @@
 
     // Crear objeto URL para manipulación
     try {
-      const url = new URL(u);
+      const url = new URL(u, location.href);
 
       // Eliminar parámetros de seguimiento comunes
       const trackingParams = [
