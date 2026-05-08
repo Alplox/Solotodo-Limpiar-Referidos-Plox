@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Solotodo Limpiar Referidos Plox
 // @namespace    limpiotodo
-// @version      0.2
+// @version      0.3
 // @description  Limpia enlaces redirigidos y elimina parámetros de seguimiento en solotodo.cl
 // @author       Alplox
 // @match        https://*.solotodo.cl/*
@@ -48,6 +48,19 @@
     return null;
   }
 
+
+  // Extrae URL destino caso: data.afilio.com.br/v3/deeplink
+  function extractFromAfilio(href) {
+    if (!href) return null;
+    try {
+      const url = new URL(href);
+      if (!/(^|\.)afilio\.com\.br$/.test(url.hostname)) return null;
+      const target = url.searchParams.get('url');
+      if (target) return safeDecode(target);
+    } catch (e) { return null; }
+    return null;
+  }
+
   // Extrae la URL destino de redirecciones conocidas
   function extractTarget(href) {
     if (!href) return null;
@@ -55,6 +68,8 @@
     if (tryMeli) return tryMeli;
     const tryAd = extractFromAdSoicos(href);
     if (tryAd) return tryAd;
+    const tryAfilio = extractFromAfilio(href);
+    if (tryAfilio) return tryAfilio;
     return null;
   }
 
@@ -104,7 +119,7 @@
 
     // Eliminar atributos de seguimiento comunes
     ['data-tracking', 'data-ref', 'data-referrer', 'onclick', 'onmousedown', 'data-cid'].forEach(attr => {
-      try { a.removeAttribute(attr); } catch (e) {}
+      try { a.removeAttribute(attr); } catch (e) { }
     });
 
     // Asegurar seguridad con rel="noopener"
@@ -116,6 +131,7 @@
       'a[href*="ad.soicos"]',
       'a[href*="publicapi.solotodo.com"][href*="meli_redirect"]',
       'a[href*="meli_redirect"]',
+      'a[href*="afilio.com.br"]',
       'a[href*="utm_"]',
       'a[href*="kid="]',
       'a[href*="affiliate"]'
